@@ -27,32 +27,14 @@ namespace Assets
         // Update is called once per frame
         public void Update ()
         {
+
             //var vertical = Input.GetAxis("Vertical");
-            var horizontal = Input.GetAxis(HorizontalAxis);
+            
             
             int direction;
             bool isMoving;
 
-            if (!_runningAtFullSpeed)
-            {
-                if (horizontal >= 1f || horizontal <= -1f)
-                {
-                    _runningAtFullSpeed = true;
-                }
-            }
-            else
-            {
-                if (horizontal == 0f)
-                {
-                    //User reached a full stop, turn off flag
-                    _runningAtFullSpeed = false;
-                }
-                else  if ((horizontal >= 0 && horizontal < 1f) || (horizontal <= 0 && horizontal > -1f))
-                {
-                    //Already running at full speed, but slowing down - just force horizontal to be 0 for a full stop
-                    horizontal = 0f;
-                }
-            }
+            var horizontal = GetHorizontalMovement();
 
 
             if (horizontal > 0f)
@@ -78,8 +60,32 @@ namespace Assets
                 Flip();
                 _previousDirection = direction;
             }
+        }
 
-            
+        private float GetHorizontalMovement()
+        {
+            var horizontal = Input.GetAxis(HorizontalAxis);
+            if (!_runningAtFullSpeed)
+            {
+                if (horizontal >= 1f || horizontal <= -1f)
+                {
+                    _runningAtFullSpeed = true;
+                }
+            }
+            else
+            {
+                if (horizontal == 0f)
+                {
+                    //User reached a full stop, turn off flag
+                    _runningAtFullSpeed = false;
+                }
+                else if ((horizontal >= 0 && horizontal < 1f) || (horizontal <= 0 && horizontal > -1f))
+                {
+                    //Already running at full speed, but slowing down - just force horizontal to be 0 for a full stop
+                    horizontal = 0f;
+                }
+            }
+            return horizontal;
         }
 
         private void Flip()
