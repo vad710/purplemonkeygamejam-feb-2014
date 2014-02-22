@@ -36,7 +36,7 @@ namespace Assets
 
             var horizontal = GetHorizontalMovement();
 
-
+            //Update Animation
             if (horizontal > 0f)
             {
                 direction = MovingForward;
@@ -60,6 +60,12 @@ namespace Assets
                 Flip();
                 _previousDirection = direction;
             }
+
+            //Update movement
+            var position = _transform.position;
+            position.x += (horizontal * 0.1f);
+            _transform.position = position;
+
         }
 
         private float GetHorizontalMovement()
