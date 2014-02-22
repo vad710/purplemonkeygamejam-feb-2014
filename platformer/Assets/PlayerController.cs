@@ -10,11 +10,15 @@ namespace Assets
 
 
         private Animator _animator;
+        private Transform _transform;
+
+        private int _previousDirection = 1;
 
         // Use this for initialization
         public void Start ()
         {
             _animator = this.GetComponent<Animator>();
+            _transform = this.GetComponent<Transform>();
         }
 	
         // Update is called once per frame
@@ -23,24 +27,43 @@ namespace Assets
             //var vertical = Input.GetAxis("Vertical");
             var horizontal = Input.GetAxis(HorizontalAxis);
 
-            Debug.Log(horizontal);
+
+            int direction;
+            bool isMoving;
 
             if (horizontal > 0)
             {
-                _animator.SetInteger(DirectionAnimationParameter, 1);
-                _animator.SetBool(IsMovingAnimationParameter, true);
+                direction = 1;
+                isMoving = true;
             }
             else if (horizontal < 0)
             {
-                _animator.SetInteger(DirectionAnimationParameter, 0);
-                _animator.SetBool(IsMovingAnimationParameter, true);
+                direction = 0;
+                isMoving = true;
             }
             else
             {
-                _animator.SetBool(IsMovingAnimationParameter, false);
+                isMoving = false;
+                direction = _previousDirection;
             }
 
+            _animator.SetInteger(DirectionAnimationParameter, direction);
+            _animator.SetBool(IsMovingAnimationParameter, isMoving);
 
+            if (_previousDirection != direction)
+            {
+                Flip();
+                _previousDirection = direction;
+            }
+
+            
+        }
+
+        private void Flip()
+        {
+            var theScale = _transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
         }
     }
 }
