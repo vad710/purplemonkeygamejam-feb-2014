@@ -56,7 +56,7 @@ namespace Assets
         public void Update ()
         {
 
-            //this.CheckLanding();
+            this.CheckLanding();
 
             //var vertical = Input.GetAxis("Vertical");
 
@@ -115,6 +115,7 @@ namespace Assets
                 _grounded = true;
                 _isJumping = false;
                 _animator.SetBool(IsJumpingAnimationParameter, false);
+                _animator.SetBool(IsLandingAnimationParameter, false);
             }
         }
 
