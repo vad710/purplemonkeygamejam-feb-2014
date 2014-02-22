@@ -8,6 +8,8 @@ namespace Assets
         private const string DirectionAnimationParameter = "Direction";
         private const string IsMovingAnimationParameter = "IsMoving";
 
+        private const int MovingForward = 1;
+        private const int MovingBackward = 0;
 
         private Animator _animator;
         private Transform _transform;
@@ -33,12 +35,12 @@ namespace Assets
 
             if (horizontal > 0)
             {
-                direction = 1;
+                direction = MovingForward;
                 isMoving = true;
             }
             else if (horizontal < 0)
             {
-                direction = 0;
+                direction = MovingBackward;
                 isMoving = true;
             }
             else
