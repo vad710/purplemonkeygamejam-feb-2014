@@ -5,7 +5,6 @@ namespace Assets
     public class PlayerController : MonoBehaviour
     {
         private const string HorizontalAxis = "Horizontal";
-        private const string DirectionAnimationParameter = "Direction";
         private const string IsMovingAnimationParameter = "IsMoving";
 
         private const int MovingForward = 1;
@@ -15,6 +14,8 @@ namespace Assets
         private Transform _transform;
 
         private int _previousDirection = 1;
+        private bool _runningAtFullSpeed;
+
 
         // Use this for initialization
         public void Start ()
@@ -28,17 +29,38 @@ namespace Assets
         {
             //var vertical = Input.GetAxis("Vertical");
             var horizontal = Input.GetAxis(HorizontalAxis);
-
-
+            
             int direction;
             bool isMoving;
 
-            if (horizontal > 0)
+            if (!_runningAtFullSpeed)
+            {
+                if (horizontal >= 1f || horizontal <= -1f)
+                {
+                    _runningAtFullSpeed = true;
+                }
+            }
+            else
+            {
+                if (horizontal == 0f)
+                {
+                    //User reached a full stop, turn off flag
+                    _runningAtFullSpeed = false;
+                }
+                else  if ((horizontal >= 0 && horizontal < 1f) || (horizontal <= 0 && horizontal > -1f))
+                {
+                    //Already running at full speed, but slowing down - just force horizontal to be 0 for a full stop
+                    horizontal = 0f;
+                }
+            }
+
+
+            if (horizontal > 0f)
             {
                 direction = MovingForward;
                 isMoving = true;
             }
-            else if (horizontal < 0)
+            else if (horizontal < 0f)
             {
                 direction = MovingBackward;
                 isMoving = true;
@@ -49,7 +71,6 @@ namespace Assets
                 direction = _previousDirection;
             }
 
-            _animator.SetInteger(DirectionAnimationParameter, direction);
             _animator.SetBool(IsMovingAnimationParameter, isMoving);
 
             if (_previousDirection != direction)
