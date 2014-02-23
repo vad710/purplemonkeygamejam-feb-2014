@@ -1,26 +1,29 @@
 ﻿using Assets.Scripts;
 using UnityEngine;
-using System.Collections;
 
-public class BriefCase : MonoBehaviour
+namespace Assets
 {
-
-    public Collider2D TriggerObject;
-    public CameraFollow Camera;
-    private bool _triggered;
-
-    public void OnTriggerEnter2D(Collider2D other)
+    public class BriefCase : MonoBehaviour
     {
-        if (!_triggered && other == TriggerObject)
+
+        public Collider2D TriggerObject;
+        public CameraFollow Camera;
+        private bool _triggered;
+
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("BriefCase Triggered!");
-
-            if (Camera != null)
+            if (!_triggered && other == TriggerObject)
             {
-                Camera.ReturnTrigger();
-            }
+                Debug.Log("BriefCase Triggered!");
+                _triggered = true;
 
-            _triggered = true;
+                if (Camera != null)
+                {
+                    Camera.ReturnTrigger();
+                }
+
+                
+            }
         }
     }
 }

@@ -74,6 +74,13 @@ namespace Assets.Scripts
             this.audio.Stop();
             this.audio.clip = this.ReturnMusic;
             this.audio.Play();
+
+            //PostGame.renderer.enabled = true;
+
+            var postGameLayer = LayerMask.NameToLayer("PostGame");
+
+            this.camera.cullingMask |= (1 << postGameLayer);
+
         }
     }
 }

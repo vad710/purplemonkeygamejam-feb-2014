@@ -13,6 +13,8 @@ namespace Assets
 
             this.camera.orthographicSize = Screen.height * gameObject.camera.rect.height / (PixelsPerUnit * Scale) / 2.0f;//- 0.1f;
 
+            var postGameLayer = LayerMask.NameToLayer("PostGame");
+            camera.cullingMask = ~(1 << postGameLayer);
         }
 
     }
