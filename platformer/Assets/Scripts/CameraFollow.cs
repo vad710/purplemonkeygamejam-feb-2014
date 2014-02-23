@@ -75,12 +75,16 @@ namespace Assets.Scripts
             this.audio.clip = this.ReturnMusic;
             this.audio.Play();
 
-            //PostGame.renderer.enabled = true;
+            
 
+            //Show PostGame Layer
             var postGameLayer = LayerMask.NameToLayer("PostGame");
-
             this.camera.cullingMask |= (1 << postGameLayer);
 
+
+            ////Hide Enemies Layer
+            //var enemyLayer = LayerMask.NameToLayer("Enemy");
+            //this.camera.cullingMask = ~(1 << enemyLayer);
         }
     }
 }
