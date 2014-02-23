@@ -96,6 +96,24 @@ Transition:
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
+--- !u!1101 &110135708
+Transition:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110240697}
+  m_DstState: {fileID: 110201531}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsLanding
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
 --- !u!1101 &110144293
 Transition:
   m_ObjectHideFlags: 3
@@ -222,7 +240,7 @@ State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Landing
+  m_Name: Falling
   m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
@@ -293,6 +311,7 @@ StateMachine:
       second:
       - {fileID: 110147864}
       - {fileID: 110102454}
+      - {fileID: 110135708}
     data:
       first: {fileID: 110264791}
       second:
