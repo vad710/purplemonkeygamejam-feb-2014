@@ -48,7 +48,7 @@ namespace Assets
             }
             else if (collision.gameObject.tag == "Environment")
             {
-                this.audio.clip = this.RicochetAudioClip;
+                this.audio.clip = this.HitPersonAudioClip;
                 collided = true;
             }
 

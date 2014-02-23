@@ -43,7 +43,7 @@ namespace Assets
             if (Time.time >= _nextFireTime)
             {
 
-                Debug.Log("Fire!!");
+                //Debug.Log("Fire!!");
 
                 // play the audioclip.
                 audio.Play();
