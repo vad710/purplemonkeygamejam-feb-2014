@@ -8,7 +8,7 @@ namespace Assets
 
         public Rigidbody2D Bullet;
 
-        private const float RateOfFire = 1f;
+        private const float RateOfFire = 0.5f;
         private const float BulletSpeed = 10;
 
         private PlayerController _playerController;
