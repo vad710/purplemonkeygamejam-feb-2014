@@ -8,7 +8,7 @@ namespace Assets
         private BoxCollider2D _collider;
         private Transform _player;
 
-        private const float ChaseSpeed = 0.015f;
+        private const float ChaseSpeed = 0.025f;
 
         private const int JumpForce = 325;
         private const float LineCastDistance = 0.5f;

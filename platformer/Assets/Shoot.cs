@@ -11,8 +11,8 @@ namespace Assets
         private const float RateOfFire = 0.25f;
         private const float BulletSpeed = 15;
 
-        private readonly Vector3 _bulletSpawnPositionRight = new Vector3(0.6f, -0.1f, -1f);
-        private readonly Vector3 _bulletSpawnPositionLeft = new Vector3(-0.6f, -0.1f, -1f);
+        private readonly Vector3 _bulletSpawnPositionRight = new Vector3(0.6f, 0f, -1f);
+        private readonly Vector3 _bulletSpawnPositionLeft = new Vector3(-0.6f, 0f, -1f);
 
         private PlayerController _playerController;
         private float _nextFireTime;
