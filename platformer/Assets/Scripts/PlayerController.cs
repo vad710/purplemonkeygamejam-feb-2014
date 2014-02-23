@@ -28,6 +28,8 @@ namespace Assets
         // Use this for initialization
         public void Start ()
         {
+            this.IsFacingRight = true; //default start position
+
             _animator = this.GetComponent<Animator>();
             _transform = this.transform;
             _rigidBody = this.rigidbody2D;
@@ -156,9 +158,14 @@ namespace Assets
 
         private void Flip()
         {
+            this.IsFacingRight = !this.IsFacingRight;
+
             var theScale = _transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
         }
+
+
+        public bool IsFacingRight { get; private set; }
     }
 }
