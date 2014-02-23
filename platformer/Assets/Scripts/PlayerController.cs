@@ -112,6 +112,7 @@ namespace Assets
 
             //this means the player is grounded
             if (collision.gameObject.tag == "Environment" || collision.gameObject.tag == "Enemy")
+            //if (collision.gameObject.layer == _groundLayer)
             {
                 _grounded = true;
                 _animator.SetBool(IsJumpingAnimationParameter, false);
