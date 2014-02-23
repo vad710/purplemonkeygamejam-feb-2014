@@ -28,13 +28,16 @@ namespace Assets
         // Use this for initialization
         public void Start ()
         {
-            this.IsFacingRight = true; //default start position
+            
 
             _animator = this.GetComponent<Animator>();
             _transform = this.transform;
             _rigidBody = this.rigidbody2D;
 
             _groundLayer = LayerMask.NameToLayer("Ground");
+
+            
+            this.IsFacingRight = true; //default start position
         }
 
 
@@ -121,7 +124,7 @@ namespace Assets
 
         public void OnCollisionExit2D(Collision2D collision)
         {
-            Debug.Log("Not Grounded!");
+            //Debug.Log("Not Grounded!");
 
             //tha player is leaving the ground
             if (collision.gameObject.layer == _groundLayer)

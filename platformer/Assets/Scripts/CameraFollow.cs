@@ -53,9 +53,14 @@ namespace Assets.Scripts
                 // ... the target y coordinate should be a Lerp between the camera's current y position and the player's current y position.
                 targetY = Mathf.Lerp(transform.position.y, ObjectToFollow.position.y, YSmooth * Time.deltaTime);
 
+           // Debug.Log(string.Format("Screen.Width {0} and Camera.Rect.Width: {1}", Screen.width, gameObject.camera.rect.width));
+
+            var xModifier = 1; //(Screen.width/2f)/100f; // gameObject.camera.rect.width/2.5f;//(Screen.width * gameObject.camera.rect.width) / 100f / 6.0f;
+            var yModifier = 1;//gameObject.camera.rect.height/2f;
+
             //// The target x and y coordinates should not be larger than the maximum or smaller than the minimum.
-            targetX = Mathf.Clamp(targetX, MinXAndY.x, MaxXAndY.x);
-            targetY = Mathf.Clamp(targetY, MinXAndY.y, MaxXAndY.y);
+            targetX = Mathf.Clamp(targetX, MinXAndY.x + xModifier, MaxXAndY.x);
+            targetY = Mathf.Clamp(targetY, MinXAndY.y + yModifier, MaxXAndY.y + yModifier);
 
             // Set the camera's position to the target position with the same z component.
             transform.position = new Vector3(targetX, targetY, transform.position.z);
