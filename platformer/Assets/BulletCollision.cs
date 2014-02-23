@@ -32,6 +32,14 @@ namespace Assets
             {
                 this.audio.clip = this.HitPersonAudioClip;
                 collided = true;
+
+                var biker = collision.gameObject.GetComponent<Biker>();
+
+                if (biker != null)
+                {
+                    biker.Kill();
+                }
+
             }
             else if (collision.gameObject.tag == "Environment")
             {
@@ -43,7 +51,7 @@ namespace Assets
             if (collided)
             {
                 this.audio.Play();
-                Destroy(this.gameObject);                
+                Destroy(this.gameObject, 0.1f);                
             }
         }
     }
