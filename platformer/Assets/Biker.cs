@@ -18,6 +18,9 @@ namespace Assets
         private static readonly Vector2 DeadBoxSize = new Vector2(0.82f, 0.3f);
         private static readonly Vector2 DeadBoxCenter = new Vector2(0f, -0.32f);
 
+        private const string IsJumpingAnimationParameter = "IsJumping";
+        private const string IsLandingAnimationParameter = "IsLanding";
+
         private bool _isJumping;
 
         // Use this for initialization
@@ -103,7 +106,7 @@ namespace Assets
                         //    lineCastResult.collider.gameObject.name));
 
                         rigidbody2D.AddForce(new Vector2(0f, JumpForce));
-                        //_animator.SetBool(IsJumpingAnimationParameter, true);
+                        _animator.SetBool(IsJumpingAnimationParameter, true);
                         //_grounded = false;     
                         _isJumping = true;
                     }
@@ -111,6 +114,8 @@ namespace Assets
             }
             else
             {
+                this.CheckFalling();
+
                 var lineCastDestination = new Vector2(transform.position.x, transform.position.y - LineCastDistance);
 
                 //see if we landed on the ground
@@ -120,15 +125,27 @@ namespace Assets
                 {
                     if (lineCastResult.collider.tag == "Environment")
                     {
-                        //_animator.SetBool(IsJumpingAnimationParameter, true);
+                        _animator.SetBool(IsJumpingAnimationParameter, false);
+                        _animator.SetBool(IsLandingAnimationParameter, false);
                         _isJumping = false;
                     }
                 }
 
             }
+        }
 
+        private void CheckFalling()
+        {
+            //Determines when the player begins to fall after he begins jumping
 
-
+            if (_isJumping)
+            {
+                if (this.rigidbody2D.velocity.y <= 0.75)
+                {
+                    _animator.SetBool(IsJumpingAnimationParameter, false);
+                    _animator.SetBool(IsLandingAnimationParameter, true);
+                }
+            }
         }
 
         private void Flip()
