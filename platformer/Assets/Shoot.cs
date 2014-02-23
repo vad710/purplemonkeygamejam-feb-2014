@@ -9,10 +9,14 @@ namespace Assets
         public Rigidbody2D Bullet;
 
         private const float RateOfFire = 0.5f;
-        private const float BulletSpeed = 10;
+        private const float BulletSpeed = 15;
+
+        private readonly Vector3 _bulletSpawnPositionRight = new Vector3(0.6f, -0.1f, -1f);
+        private readonly Vector3 _bulletSpawnPositionLeft = new Vector3(-0.6f, -0.1f, -1f);
 
         private PlayerController _playerController;
         private float _nextFireTime;
+
 
 
 
@@ -43,18 +47,18 @@ namespace Assets
 
                 // play the audioclip.
                 audio.Play();
-
+                
                 //// If the player is facing right...
                 if (_playerController.IsFacingRight)
                 {
                     // ... instantiate the rocket facing right and set it's velocity to the right. 
-                    var bulletInstance = Instantiate(Bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody2D;
+                    var bulletInstance = Instantiate(Bullet, transform.position + this._bulletSpawnPositionRight, Quaternion.Euler(Vector3.zero)) as Rigidbody2D;
                     bulletInstance.velocity = new Vector2(BulletSpeed, 0);
                 }
                 else
                 {
                 //    // Otherwise instantiate the rocket facing left and set it's velocity to the left.
-                    var bulletInstance = Instantiate(Bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 180f))) as Rigidbody2D;
+                    var bulletInstance = Instantiate(Bullet, transform.position + this._bulletSpawnPositionLeft, Quaternion.Euler(new Vector3(0, 0, 180f))) as Rigidbody2D;
                     bulletInstance.velocity = new Vector2(-BulletSpeed, 0);
                 }
 

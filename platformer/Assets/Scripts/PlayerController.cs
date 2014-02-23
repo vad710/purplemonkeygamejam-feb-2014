@@ -111,7 +111,7 @@ namespace Assets
             //Debug.Log("OnCollisionEnter!");
 
             //this means the player is grounded
-            if (collision.gameObject.layer == _groundLayer)
+            if (collision.gameObject.tag == "Environment" || collision.gameObject.tag == "Enemy")
             {
                 _grounded = true;
                 _animator.SetBool(IsJumpingAnimationParameter, false);

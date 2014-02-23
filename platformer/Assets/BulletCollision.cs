@@ -8,7 +8,7 @@ namespace Assets
         public AudioClip HitPersonAudioClip;
         public AudioClip RicochetAudioClip;
 
-
+        private bool _spent;
 
         //// Use this for initialization
         //void Start () 
@@ -25,6 +25,11 @@ namespace Assets
         public void OnCollisionEnter2D(Collision2D collision)
         {
             //determine if the bullet is hitting a person or a thing
+
+            if (_spent)
+            {
+                return;
+            }
 
             var collided = false;
 
@@ -50,7 +55,9 @@ namespace Assets
 
             if (collided)
             {
+                _spent = true;
                 this.audio.Play();
+                this.renderer.enabled = false;
                 Destroy(this.gameObject, 0.1f);                
             }
         }
