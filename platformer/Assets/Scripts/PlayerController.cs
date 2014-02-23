@@ -170,5 +170,7 @@ namespace Assets
 
 
         public bool IsFacingRight { get; private set; }
+
+        public bool HasBriefcase { get; set; }
     }
 }

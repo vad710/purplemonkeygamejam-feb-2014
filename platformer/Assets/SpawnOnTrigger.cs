@@ -5,14 +5,20 @@ namespace Assets
     public class SpawnOnTrigger : MonoBehaviour
     {
         public Transform PrefabToSpawn;
-        public Transform TriggerObject;
+        public PlayerController TriggerObject;
         public Vector3 SpawnPosition;
+        public bool NeedsBriefCase;
 
         private bool _triggered;
 
         public void OnTriggerEnter2D(Collider2D other)
         {
             if (PrefabToSpawn == null || _triggered)
+            {
+                return;
+            }
+
+            if (NeedsBriefCase != TriggerObject.HasBriefcase)
             {
                 return;
             }
