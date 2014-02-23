@@ -12,7 +12,7 @@ namespace Assets
         private const int MovingForward = 1;
         private const int MovingBackward = 0;
         private const float MovementSpeed = 0.1f;
-        private const int JumpForce = 300;
+        private const int JumpForce = 325;
 
         private Animator _animator;
         private Transform _transform;
@@ -112,7 +112,6 @@ namespace Assets
 
             //this means the player is grounded
             if (collision.gameObject.tag == "Environment" || collision.gameObject.tag == "Enemy")
-            //if (collision.gameObject.layer == _groundLayer)
             {
                 _grounded = true;
                 _animator.SetBool(IsJumpingAnimationParameter, false);
