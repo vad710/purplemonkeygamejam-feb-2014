@@ -6,6 +6,7 @@ namespace Assets.Scripts
     {
 
         public Transform ObjectToFollow;
+        public AudioClip ReturnMusic;
 
         private const float XMargin = 0.1f; // Distance in the x axis the player can move before the camera follows.
         private const float YMargin = 0.1f; // Distance in the y axis the player can move before the camera follows.
@@ -15,7 +16,7 @@ namespace Assets.Scripts
         public Vector2 MaxXAndY;		// The maximum x and y coordinates the camera can have.
         public Vector2 MinXAndY;		// The minimum x and y coordinates the camera can have.
 
-
+        
 
         bool CheckXMargin()
         {
@@ -64,6 +65,15 @@ namespace Assets.Scripts
 
             // Set the camera's position to the target position with the same z component.
             transform.position = new Vector3(targetX, targetY, transform.position.z);
+        }
+
+        public void ReturnTrigger()
+        {
+            Debug.Log("Camere Return Triggered!!");
+
+            this.audio.Stop();
+            this.audio.clip = this.ReturnMusic;
+            this.audio.Play();
         }
     }
 }

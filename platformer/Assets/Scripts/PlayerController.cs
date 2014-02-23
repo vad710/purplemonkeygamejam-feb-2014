@@ -34,8 +34,8 @@ namespace Assets
             _transform = this.transform;
             _rigidBody = this.rigidbody2D;
 
-            
 
+            //_groundLayer = LayerMask.NameToLayer("Environment");
             
             this.IsFacingRight = true; //default start position
         }
