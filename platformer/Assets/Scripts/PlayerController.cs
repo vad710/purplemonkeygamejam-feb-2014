@@ -23,7 +23,6 @@ namespace Assets
         private int _previousDirection = 1;
         private bool _runningAtFullSpeed;
         private bool _grounded = true;
-        private bool _isJumping = false;
 
 
         // Use this for initialization
@@ -37,11 +36,11 @@ namespace Assets
         }
 
 
-        private void CheckLanding()
+        private void CheckFalling()
         {
             //Determines when the player begins to fall after he begins jumping
 
-            if (_isJumping)
+            if (!_grounded)
             {
                 if (_rigidBody.velocity.y <= 0.75)
                 {
@@ -56,7 +55,7 @@ namespace Assets
         public void Update ()
         {
 
-            this.CheckLanding();
+            this.CheckFalling();
 
             //var vertical = Input.GetAxis("Vertical");
 
@@ -64,7 +63,6 @@ namespace Assets
             {
                 rigidbody2D.AddForce(new Vector2(0f, JumpForce));
                 _animator.SetBool(IsJumpingAnimationParameter, true);
-                _isJumping = true;
                 _grounded = false;
             }
 
@@ -110,12 +108,23 @@ namespace Assets
         {
             //Debug.Log("OnCollisionEnter!");
 
-            if (!_grounded && _isJumping && collision.gameObject.layer == _groundLayer)
+            //this means the player is grounded
+            if (collision.gameObject.layer == _groundLayer)
             {
                 _grounded = true;
-                _isJumping = false;
                 _animator.SetBool(IsJumpingAnimationParameter, false);
                 _animator.SetBool(IsLandingAnimationParameter, false);
+            }
+        }
+
+        public void OnCollisionExit2D(Collision2D collision)
+        {
+            Debug.Log("Not Grounded!");
+
+            //tha player is leaving the ground
+            if (collision.gameObject.layer == _groundLayer)
+            {
+                _grounded = false;
             }
         }
 
