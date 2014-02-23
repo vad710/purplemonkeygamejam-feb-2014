@@ -55,7 +55,7 @@ namespace Assets
 
             
 
-            if (direction.x > 1)
+            if (direction.x > 0)
             {
                 //moving right
                 newX = this.transform.position.x + ChaseSpeed;
