@@ -13,6 +13,10 @@ namespace Assets
         private const int JumpForce = 325;
         private const float LineCastDistance = 0.5f;
 
+        public const float StartDelay = 8f;
+        private float _startTime;
+
+
         private bool _isDead;
 
         private static readonly Vector2 DeadBoxSize = new Vector2(0.82f, 0.3f);
@@ -33,6 +37,8 @@ namespace Assets
 
             _player = FindObjectOfType<PlayerController>().transform;
 
+
+            _startTime = Time.time + StartDelay;
         }
 	
         // Update is called once per frame
@@ -48,6 +54,12 @@ namespace Assets
             {
                 return;
             }
+
+            if (Time.time < _startTime)
+            {
+                return;
+            }
+
 
             //Find the direction of the player
             var direction = _player.position - this.transform.position;
